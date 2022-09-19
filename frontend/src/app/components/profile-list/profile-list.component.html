@@ -1,0 +1,15 @@
+<h1>Profile List ({{this.profiles.length}})</h1>
+<table>
+    <tr>
+        <th>Profile Picture</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <ng-container *ngIf="profiles" >
+        <app-profile-card *ngFor="let profile of profiles" [profile]="profile" 
+        (editProfile)="editProfile($event)" (deleteProfile)="deleteProfile($event)"></app-profile-card>
+    </ng-container>
+</table>

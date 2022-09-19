@@ -1,0 +1,22 @@
+<!-- <p>profile-card works!</p> -->
+<!-- <tr *ngIf="!editing; else form">
+    <td>{{this.profile.profilePicture}}</td>
+    <td>{{this.profile.name}}</td>
+    <td>{{this.profile.email}}</td>
+    <td>{{this.profile.phone}}</td>
+    <td><button>Edit</button></td>
+    <td><button>Delete</button></td>
+</tr> -->
+<div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <input type='text' formControlName="profilePicture">
+        <input type="text" formControlName="name">
+        <input type="text" formControlName="email">
+        <input type="text" formControlName="phone">
+        <button *ngIf="!editing" (click)="onEdit()">Edit</button>
+        <button (click)="onDelete()">Delete</button>
+        <button *ngIf="editing" type="submit">Save</button>
+
+    </form>  
+</div>
+
