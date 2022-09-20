@@ -7,16 +7,16 @@
     <td><button>Edit</button></td>
     <td><button>Delete</button></td>
 </tr> -->
-<div>
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <input type='text' formControlName="profilePicture">
-        <input type="text" formControlName="name">
-        <input type="text" formControlName="email">
-        <input type="text" formControlName="phone">
-        <button *ngIf="!editing" (click)="onEdit()">Edit</button>
-        <button (click)="onDelete()">Delete</button>
-        <button *ngIf="editing" type="submit">Save</button>
 
-    </form>  
-</div>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <tr>
+        <td><input type='text' formControlName="profilePicture"></td>
+        <td><input type="text" formControlName="name"></td>
+        <td><input type="text" formControlName="email"></td>
+        <td><input type="text" formControlName="phone"></td>
+        <td><button *ngIf="!editing" (click)="onEdit($event)">Edit</button></td>
+        <td><button (click)="onDelete($event)">Delete</button></td>
+        <td><button *ngIf="editing" type="submit">Save</button></td>
+    </tr>
+</form>  
 

@@ -24,20 +24,20 @@ export class HttpService {
     return throwError(() => new Error('Something bad happend; please try agian later'));
   }
 
-  addProfile(newProfile: Profile): Observable<any>{
+  addProfile(newProfile: any): Observable<Profile>{
     return this.http.post<Profile>(this.domainUrl + '/profiles/add', newProfile);
   }
 
-  getProfiles() {
-    return this.http.get<any[]>(this.domainUrl + '/profiles');
+  getProfiles(): Observable<Profile[]> {
+    return this.http.get<Profile[]>(this.domainUrl + '/profiles');
   }
 
-  updateProfile(updatedProfile: Profile): Observable<any>{
-    return this.http.put(`${this.domainUrl}/profiles/${updatedProfile.id}`, updatedProfile);
+  updateProfile(updatedProfile: Profile): Observable<Profile>{
+    return this.http.put<Profile>(`${this.domainUrl}/profiles/${updatedProfile._id}`, updatedProfile);
   }
 
-  deleteProfile(profileId: string): Observable<any>{
-    return this.http.delete(profileId);
+  deleteProfile(profileId: string): Observable<Profile>{
+    return this.http.delete<Profile>(`${this.domainUrl}/profiles/${profileId}`);
   }
 
 }

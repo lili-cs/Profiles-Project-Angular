@@ -18,23 +18,17 @@ export class ProfilesPageComponent implements OnInit {
   ngOnInit(): void {
     this.httpService.getProfiles()
       .subscribe((data: any[]) => {
-        data.forEach(user => {
-          const profile: Profile = {
-            id: user._id,
-            profilePicture: user.profilePicture,
-            name: user.name,
-            email: user.email,
-            phone: user.phone
-          } ;
+        data.forEach(profile => {
           this.profiles.push(profile);
         })
       });
+      console.log(this.profiles);
   }
 
   addProfile(newProfile: Profile){
     this.httpService.addProfile(newProfile)
       .subscribe((data:Profile) => {
-        this.profiles.push(newProfile);
+        this.profiles.push(data);
       });
   }
 

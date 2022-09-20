@@ -8,7 +8,7 @@ router.post('/profiles/add', async (req, res, next) => {
     const user = new User(req.body);
     try{
         await user.save();
-        res.send(req.body);
+        res.send(user);
     }
     catch(err){
         console.log(err);
@@ -25,12 +25,11 @@ router.put('/profiles/:userId', async (req, res) => {
     const updatedUser = req.body;
     try{
         let profile = await User.findById(updatedUser.id);
-        profile = {
-            profilePicture: updatedUser.profilePicture,
-            name: updatedUser.name,
-            email: updatedUser.email,
-            phone: updatedUser.phone
-        };
+        profile.profilePicture = updatedUser.profilePicture;
+        profile.name = updatedUser.name;
+        profile.email = updatedUser.email;
+        profile.phone = updatedUser.phone;
+        
         await profile.save();
         res.send(profile);
     }
@@ -40,10 +39,13 @@ router.put('/profiles/:userId', async (req, res) => {
 });
 
 router.delete('/profiles/:userId', async (req, res)=> {
-    const userId = param.userId;
+    const userId = req.params.userId;
     try{
-        await User.findByIdAndDelete(userId);
-        res.send(userId);
+        // await User.findByIdAndDelete(userId);
+        const user = await User.findById(userId);
+        await user.remove();
+        // await User.deleteOne({_id: userId});
+        res.send(user);
     }
     catch(err){
         console.log(err);

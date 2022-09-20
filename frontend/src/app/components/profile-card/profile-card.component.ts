@@ -37,25 +37,21 @@ export class ProfileCardComponent implements OnInit, OnChanges {
     }
   }
 
-  onEdit(){
+  onEdit(event: Event){
     this.editing = true;
     this.profileForm.enable();
   }
 
-  onDelete(){
-    this.deleteProfile.emit(this.profile.id);
+  onDelete(event: Event){
+    event.stopPropagation();
+    this.deleteProfile.emit(this.profile._id);
   }
 
   onSubmit(){
-    const updatedInfo = this.profileForm.getRawValue();
-    const updatedProfile: Profile = {
-      id: this.profile.id,
-      name: updatedInfo.name,
-      email: updatedInfo.email,
-      phone: updatedInfo.phone,
-      profilePicture: updatedInfo.profilePicture
-    };
-
+    const updatedProfile = this.profileForm.getRawValue();
     this.editProfile.emit(updatedProfile);
+
+    this.editing = false;
+    this.profileForm.disable();
   }
 }

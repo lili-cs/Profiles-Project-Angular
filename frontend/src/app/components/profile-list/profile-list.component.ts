@@ -21,17 +21,19 @@ export class ProfileListComponent implements OnInit {
   editProfile(updatedProfile: Profile){
     this.httpService.updateProfile(updatedProfile)
       .subscribe((data: any) => {
-        let obj = this.profiles.filter(item => item.id == data.id)[0];
+        let obj = this.profiles.filter(item => item._id == data._id)[0];
         obj = data;
       });
   }
 
   deleteProfile(profileId: string){
+    console.log(`delete profile ${profileId}`);
     this.httpService.deleteProfile(profileId)
-      .subscribe((data: any) => {
+      .subscribe((deletedProfile: Profile) => {
+        console.log(deletedProfile);
         this.profiles = this.profiles.filter(item => {
-          item.id != data.id
+          item._id !== deletedProfile._id
         });
-      })
+      });
   }
 }
