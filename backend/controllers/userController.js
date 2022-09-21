@@ -4,8 +4,13 @@ const router = express.Router();
 const User = require('../models/User');
 
 
-router.post('/profiles/add', async (req, res, next) => {
-    const user = new User(req.body);
+router.post('/profiles', async (req, res, next) => {
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        profilePicture: req.body.profilePicture
+    });
     try{
         await user.save();
         res.send(user);
